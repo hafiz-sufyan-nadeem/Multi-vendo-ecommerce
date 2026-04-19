@@ -22,9 +22,9 @@ class ProductController extends Controller
             'price' => 'required',
             'stock' => 'required',
             'description' => 'required',
+            'category_id' => 'required',
             'sale' => 'nullable',
             'image' => 'nullable',
-            'category_id' => 'required'
         ]);
 
         $validated['vendor_id'] = auth()->id();
