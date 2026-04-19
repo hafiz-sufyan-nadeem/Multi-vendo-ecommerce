@@ -17,9 +17,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+
+//    Product CRUD
     Route::get('/products', [ProductController::class, 'index']);
     Route::get('/products/create', [ProductController::class, 'create']);
     Route::post('/products', [ProductController::class, 'store']);
+    Route::get('/products/{id}/edit', [ProductController::class, 'edit']);
+    Route::patch('/products/{id}', [ProductController::class, 'update']);
 });
 
 require __DIR__.'/auth.php';
