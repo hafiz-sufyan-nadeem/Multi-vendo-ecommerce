@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/products', [ProductController::class, 'store']);
     Route::get('/products/{id}/edit', [ProductController::class, 'edit']);
     Route::patch('/products/{id}', [ProductController::class, 'update']);
+    Route::delete('products/{id}', [ProductController::class, 'destroy']);
 });
 
 require __DIR__.'/auth.php';
