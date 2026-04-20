@@ -7,7 +7,14 @@
 
     <textarea name="description">{{ $product->description }}</textarea>
 
-    <input type="number" name="category_id" value="{{ $product->category_id }}">
+    <select name="category_id">
+        @foreach($categories as $category)
+            <option value="{{ $category->id }}"
+                {{ $product->category_id == $category->id ? 'selected' : '' }}>
+                {{ $category->name }}
+            </option>
+        @endforeach
+    </select>
 
     <button type="submit">Update</button>
 </form>

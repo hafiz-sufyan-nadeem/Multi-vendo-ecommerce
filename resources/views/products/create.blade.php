@@ -13,7 +13,13 @@
 
     <textarea name="description"></textarea>
 
-    <input type="number" name="category_id" placeholder="Category ID">
+    <select name="category_id">
+        @foreach($categories as $category)
+            <option value="{{ $category->id }}">
+                {{ $category->name }}
+            </option>
+        @endforeach
+    </select>
 
     <button type="submit">Add Product</button>
 </form>
