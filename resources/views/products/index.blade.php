@@ -1,13 +1,18 @@
 <h1>Products List</h1>
 
-<a href="/products/create">Add Product</a>
+@if(auth()->user()->role == 'vendor')
+    <a href="/products/create">Add Product</a>
+@endif
 @foreach($products as $product)
-    <a href="/products/{{ $product->id }}/edit">Edit</a>
-    <form method="POST" action="/products/{{ $product->id }}">
-        @csrf
-        @method('DELETE')
-        <button onclick="return confirm('Are you sure?')">Delete</button>
-    </form>
+    @if(auth()->user()->role == 'vendor' && $product->vendor_id == auth()->id())
+        <a href="/products/{{ $product->id }}/edit">Edit</a>
+
+        <form method="POST" action="/products/{{ $product->id }}">
+            @csrf
+            @method('DELETE')
+            <button type="submit">Delete</button>
+        </form>
+    @endif
     <div>
         <h3>{{ $product->name }}</h3>
         <p>{{ $product->price }}</p>

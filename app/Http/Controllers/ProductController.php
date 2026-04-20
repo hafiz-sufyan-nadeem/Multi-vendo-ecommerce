@@ -8,18 +8,29 @@ use App\Models\Product;
 class ProductController extends Controller
 {
     public function index(){
-        $products = Product::with('category')->get();
+        if(auth()->user()->role == 'vendor'){
+            $products = Product::where('vendor_id', auth()->id())->with('category')->get();
+        } else {
+            $products = Product::with('category')->get();
+        }
         return view('products.index', compact('products'));
     }
 
-    public function create(Request $request)
+    public function create()
     {
+        if(auth()->user()->role !== 'vendor'){
+            abort(403);
+        }
+
         $categories = Category::all();
         return view('products.create', compact('categories'));
     }
 
     public function store(Request $request)
     {
+        if(auth()->user()->role !== 'vendor'){
+            abort(403);
+        }
         $validated = $request->validate([
             'name' => 'required',
             'price' => 'required',
@@ -40,6 +51,9 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
+        if(auth()->user()->role == 'vendor' && $product->vendor_id != auth()->id()){
+            abort(403);
+        }
         $categories = Category::all();
         return view('products.edit', compact('product', 'categories'));
     }
@@ -47,6 +61,9 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $product = Product::findOrFail($id);
+        if(auth()->user()->role == 'vendor' && $product->vendor_id != auth()->id()){
+            abort(403);
+        }
         $validated = $request->validate([
             'name' => 'required',
             'price' => 'required',
@@ -61,6 +78,9 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
+        if(auth()->user()->role == 'vendor' && $product->vendor_id != auth()->id()){
+            abort(403);
+        }
         $product->delete();
         return redirect('/products');
     }
