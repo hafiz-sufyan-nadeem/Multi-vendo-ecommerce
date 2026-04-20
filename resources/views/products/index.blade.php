@@ -6,12 +6,13 @@
     <form method="POST" action="/products/{{ $product->id }}">
         @csrf
         @method('DELETE')
-        <button type="submit">Delete</button>
+        <button onclick="return confirm('Are you sure?')">Delete</button>
     </form>
     <div>
         <h3>{{ $product->name }}</h3>
         <p>{{ $product->price }}</p>
         <p>{{ $product->stock }}</p>
         <p>{{ $product->description }}</p>
+        <p>{{ $product->category->name }}</p>
     </div>
 @endforeach
