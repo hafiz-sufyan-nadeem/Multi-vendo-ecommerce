@@ -1,10 +1,13 @@
 <h1>Products List</h1>
 
-@if(auth()->user()->role == 'vendor')
+@if(auth()->user()->role == 'vendor' || auth()->user()->role == 'admin')
     <a href="/products/create">Add Product</a>
 @endif
 @foreach($products as $product)
-    @if(auth()->user()->role == 'vendor' && $product->vendor_id == auth()->id())
+    @if(
+     (auth()->user()->role == 'vendor' && $product->vendor_id == auth()->id())
+     || auth()->user()->role == 'admin'
+ )
         <a href="/products/{{ $product->id }}/edit">Edit</a>
 
         <form method="POST" action="/products/{{ $product->id }}">
