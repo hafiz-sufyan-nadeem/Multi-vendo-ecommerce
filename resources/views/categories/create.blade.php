@@ -4,7 +4,7 @@
     @endforeach
 @endif
 
-<form method="POST" action="/categories">
+<form method="POST" action="/categories" enctype="multipart/form-data">
     @csrf
 
     <input type="text" name="name" placeholder="Name">

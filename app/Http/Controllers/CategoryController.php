@@ -29,7 +29,7 @@ class CategoryController extends Controller
         $validated = $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'image' => 'nullable|max:2048',
         ]);
         if($request->hasFile('image')){
             $imagePath = $request->file('image')->store('categories', 'public');
