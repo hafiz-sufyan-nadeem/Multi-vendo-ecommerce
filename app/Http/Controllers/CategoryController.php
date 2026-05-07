@@ -29,8 +29,13 @@ class CategoryController extends Controller
         $validated = $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'image' => 'nullable',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
+        if($request->hasFile('image')){
+            $imagePath = $request->file('image')->store('categories', 'public');
+
+            $validated['image'] = $imagePath;
+        }
         Category::create($validated);
         return redirect('/categories');
     }
