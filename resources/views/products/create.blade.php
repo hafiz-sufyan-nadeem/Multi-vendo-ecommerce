@@ -4,12 +4,13 @@
     @endforeach
 @endif
 
-<form method="POST" action="/products">
+<form method="POST" action="/products" enctype="multipart/form-data">
     @csrf
 
     <input type="text" name="name" placeholder="Name">
     <input type="number" name="price" placeholder="Price">
     <input type="number" name="stock" placeholder="Stock">
+    <input type="file" name="image">
 
     <textarea name="description"></textarea>
 

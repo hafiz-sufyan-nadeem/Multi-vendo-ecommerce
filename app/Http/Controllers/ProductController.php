@@ -68,6 +68,7 @@ class ProductController extends Controller
             'name' => 'required',
             'price' => 'required',
             'stock' => 'required',
+            'image' => 'nullable|max:2048',
             'description' => 'required',
             'category_id' => 'required',
         ]);
