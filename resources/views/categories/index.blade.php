@@ -3,7 +3,7 @@
     <a href="/categories/create">Add Product</a>
 @foreach($categories as $category)
 
-        <a href="/products/{{ $category->id }}/edit">Edit</a>
+    <a href="/categories/{{ $category->id }}/edit">Edit</a>
 
         <form method="POST" action="/categories/{{ $category->id }}">
             @csrf
