@@ -26,4 +26,8 @@
         <p>{{ $product->description }}</p>
         <p>{{ $product->name }}</p>
     </div>
+
+    <div id="app">
+        <product-list></product-list>
+    </div>
 @endforeach
