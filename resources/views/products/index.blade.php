@@ -24,6 +24,6 @@
             <img src="{{ asset('storage/' . $product->image) }}" width="100">
         @endif
         <p>{{ $product->description }}</p>
-        <p>{{ $product->category->name }}</p>
+        <p>{{ $product->name }}</p>
     </div>
 @endforeach
